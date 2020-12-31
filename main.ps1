@@ -1,8 +1,8 @@
-Import-Module .\tests\tests.psm1
+. ".\tests\tests.ps1"
 
 $DateJson = Get-Content .\files\commitDate.json | ConvertFrom-Json
-$CurrentDate = "03-04-2021"
-Get-Date -Format "MM-dd-yyyy"
+$CurrentDate = Get-Date -Format "03-04-2021"
+
 function GetLastCommit {
     $LastCommit = Get-Content -Path ".\files\commits.txt" -Tail 1
     [int]$CommitNumber = $LastCommit -replace "[a-z\s\:]"
@@ -14,6 +14,7 @@ function ReturnJsonValue {
     { return $DateJson.$CurrentDate }
     else {
         Write-Host "Nothing to do today"
+        Start-Sleep 10
         break
     }       
 }
@@ -25,8 +26,8 @@ function MakeCommit {
     $CommitNumber = GetLastCommit
     for ($i = 1; $i -le $TimesOfCommit; $i++) {
         git add .
-        git commit -m "commit number: $($CommitNumber)" | Out-Null
-        git push origin main | Out-Null
+        git commit -m "commit number: $($CommitNumber)" | Out-Null;
+        git push origin main | Out-Null;
         Write-Host "Pushing the commits to remote repository."
         Write-Host "Commit Number: $($CommitNumber)" 
         Add-Content -Path "./files/commits.txt" -Value "Commit Number: $($CommitNumber +1)"
@@ -54,7 +55,7 @@ function DoTests {
         Test-GitRemote
         Test-GitPull
         Test-FileAndDirectory
-        CheckJsonIntegrity
+        Test-JsonIntegrity
         Test-GetLastCommit
     }
     catch {

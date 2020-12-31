@@ -83,7 +83,7 @@ function Test-GitRemote {
     }
 }
 
-function CheckJsonIntegrity {
+function Test-JsonIntegrity {
     $DateJson = Get-Content .\files\commitDate.json | ConvertFrom-Json
     $ResponseForNotValidJSON = "Json file invalid!`nThe file must follow the pattern { 'mm-dd-yyyy' :'special' or 'normal }'"
     if ($null -eq $DateJson) {
@@ -100,8 +100,6 @@ function CheckJsonIntegrity {
         if ($i -notmatch '^(0[1-9]|1[012])[- /.](0[1-9]|[12][0-9]|3[0-1])[- /.](19|20)\d\d$') {
             Write-Host "Date '$($i)' doesn't follow the pattern!"
             CloseScript "Press any key to close"
-            break
-            
         }
     }
 }
