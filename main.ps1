@@ -1,8 +1,8 @@
 Import-Module .\tests\tests.psm1
 
 $DateJson = Get-Content .\files\commitDate.json | ConvertFrom-Json
-$CurrentDate = $CurrentDate = Get-Date -Format "MM-dd-yyyy"
-
+$CurrentDate = "03-04-2021"
+Get-Date -Format "MM-dd-yyyy"
 function GetLastCommit {
     $LastCommit = Get-Content -Path ".\files\commits.txt" -Tail 1
     [int]$CommitNumber = $LastCommit -replace "[a-z\s\:]"

@@ -97,10 +97,11 @@ function CheckJsonIntegrity {
         break
     }
     foreach ($i in $DateJson.psobject.Properties.name) {
-        if ($i -notmatch '^(0[1-9]|1[012])[- /.](0[1-9]|[12][0-9]|5[01])[- /.](19|20)\d\d$') {
+        if ($i -notmatch '^(0[1-9]|1[012])[- /.](0[1-9]|[12][0-9]|3[0-1])[- /.](19|20)\d\d$') {
             Write-Host "Date '$($i)' doesn't follow the pattern!"
             CloseScript "Press any key to close"
             break
+            
         }
     }
 }
