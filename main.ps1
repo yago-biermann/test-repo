@@ -27,10 +27,11 @@ function MakeCommit {
     Write-Host "Pushing the commits to remote repository.`n"
     for ($i = 1; $i -le $TimesOfCommit; $i++) {
         git add .
-        git commit -m "commit number: $($CommitNumber)" | Clear-Host
-        git push origin main | Clear-Host
-        start-sleep 2
+        git commit -m "commit number: $($CommitNumber)"
+        git push origin main
         Write-Host "Commit Number: $($CommitNumber)`n"
+        Clear-Host
+        start-sleep 2
         Add-Content -Path "./files/commits.txt" -Value "Commit Number: $($CommitNumber +1)" 
         $CommitNumber++
     }
