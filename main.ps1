@@ -1,4 +1,4 @@
-. ".\tests\tests.ps1"
+Import-Module .\tests\tests.psm1
 
 $DateJson = Get-Content .\files\commitDate.json | ConvertFrom-Json
 $CurrentDate = Get-Date -Format "03-04-2021"
