@@ -32,7 +32,7 @@ function MakeCommit {
         start-sleep 1
         Write-Host "Pushing the commits to remote repository.`n"
         Write-Host "Commit Number: $($CommitNumber)`n" 
-        Add-Content -Path "./files/commits.txt" -Value "Commit Number: $($CommitNumber +1)`n"
+        Add-Content -Path "./files/commits.txt" -Value "Commit Number: $($CommitNumber +1)"
         $CommitNumber++
     }
 }
