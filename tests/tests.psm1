@@ -15,7 +15,6 @@ function Test-FileAndDirectory {
     $TestCommitFile = Test-Path -path ".\files\commits.txt" -PathType leaf
     $TestFilesDirectory = Test-Path -Path ".\files"
     $TestJsonFile = Test-Path -path ".\files\commitDate.json" -PathType leaf
-    Write-Host "Testing whether the directory and file exists`n"
     if (!($TestFilesDirectory)) {
         Write-Host "Directory 'files' not found`nCreating directory..."
         New-Item -Path "./files/" -ItemType Directory | Out-Null
@@ -29,9 +28,6 @@ function Test-FileAndDirectory {
         Write-Host "JSON file with commit and dates not found! impossible to continue..."
         CloseScript "Press any key to close"
         break
-    }
-    else {
-        Write-Host "Everything ok, continuing..."
     }
 }
 
@@ -96,12 +92,11 @@ function Test-JsonIntegrity {
         CloseScript "Press any key to close"
         break
     }
-    foreach ($i in $DateJson.psobject.Properties.name) {
-        if ($i -notmatch '^(0[1-9]|1[012])[- /.](0[1-9]|[12][0-9]|3[0-1])[- /.](19|20)\d\d$') {
-            Write-Host "Date '$($i)' doesn't follow the pattern!"
-            CloseScript "Press any key to close"
-        }
-    }
+    $DateJson.psobject.Properties.name | ForEach-Object -Process { if ($_ -notmatch '^(0[1-9]|1[012])[- /.](0[1-9]|[12][0-9]|3[0-1])[- /.](19|20)\d\d$') {
+        Write-Host "The date $($_) is wrong! fix it manually in commitDate.json"
+        CloseScript "Press any key to close"
+        break
+        } }
 }
 
 function CloseScript ($message) {
