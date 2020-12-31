@@ -28,7 +28,6 @@ function MakeCommit {
     for ($i = 1; $i -le $TimesOfCommit; $i++) {
         git add .
         git commit -m "commit number: $($CommitNumber)" | Out-Null
-        Clear-Host
         git push origin main | Out-Null
         Clear-Host
         start-sleep 2
