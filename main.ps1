@@ -29,6 +29,7 @@ function MakeCommit {
         git commit -m "commit number: $($CommitNumber)"
         git push origin main
         Clear-Host
+        start-sleep 1
         Write-Host "Pushing the commits to remote repository.`n"
         Write-Host "Commit Number: $($CommitNumber)`n" 
         Add-Content -Path "./files/commits.txt" -Value "Commit Number: $($CommitNumber +1)`n"
