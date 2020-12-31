@@ -1,7 +1,7 @@
 Import-Module .\tests\tests.psm1
 
 $DateJson = Get-Content .\files\commitDate.json | ConvertFrom-Json
-$CurrentDate = "01-10-2021"
+$CurrentDate = "02-28-2021"
 # Get-Date -Format "MM-dd-yyyy"
 function GetLastCommit {
     $LastCommit = Get-Content -Path ".\files\commits.txt" -Tail 1
@@ -26,14 +26,12 @@ function MakeCommit {
     $CommitNumber = GetLastCommit
     Write-Host "Pushing the commits to remote repository.`n"
     for ($i = 1; $i -le $TimesOfCommit; $i++) {
-        Clear-Host
         git add .
-        git commit -m "commit number: $($CommitNumber)"
-        git push origin main
-        Clear-Host
-        start-sleep 1
-        Add-Content -Path "./files/commits.txt" -Value "Commit Number: $($CommitNumber +1)"
-        Write-Host "Commit Number: $($CommitNumber)`n" 
+        git commit -m "commit number: $($CommitNumber)" | Clear-Host
+        git push origin main | Clear-Host
+        start-sleep 2
+        Write-Host "Commit Number: $($CommitNumber)`n"
+        Add-Content -Path "./files/commits.txt" -Value "Commit Number: $($CommitNumber +1)" 
         $CommitNumber++
     }
 }
