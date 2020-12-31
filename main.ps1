@@ -29,9 +29,9 @@ function MakeCommit {
         git add .
         git commit -m "commit number: $($CommitNumber)"
         git push origin main
-        Write-Host "Commit Number: $($CommitNumber)`n"
         Clear-Host
-        start-sleep 2
+        start-sleep 5
+        Write-Host "Commit Number: $($CommitNumber)`n"
         Add-Content -Path "./files/commits.txt" -Value "Commit Number: $($CommitNumber +1)" 
         $CommitNumber++
     }
