@@ -26,12 +26,12 @@ function MakeCommit {
     $CommitNumber = GetLastCommit
     for ($i = 1; $i -le $TimesOfCommit; $i++) {
         git add .
-        Clear-Host
         git commit -m "commit number: $($CommitNumber)"
         git push origin main
-        Write-Host "Pushing the commits to remote repository."
-        Write-Host "Commit Number: $($CommitNumber)" 
-        Add-Content -Path "./files/commits.txt" -Value "Commit Number: $($CommitNumber +1)"
+        Clear-Host
+        Write-Host "Pushing the commits to remote repository.`n"
+        Write-Host "Commit Number: $($CommitNumber)`n" 
+        Add-Content -Path "./files/commits.txt" -Value "Commit Number: $($CommitNumber +1)`n"
         $CommitNumber++
     }
 }
