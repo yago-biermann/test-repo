@@ -14,7 +14,7 @@ function ReturnJsonValue {
     { return $DateJson.$CurrentDate }
     else {
         Write-Host "Nothing to do today"
-        Start-Sleep 10
+        Start-Sleep 5
         break
     }       
 }
@@ -24,15 +24,16 @@ function MakeCommit {
         [int]$TimesOfCommit
     )
     $CommitNumber = GetLastCommit
+    Write-Host "Pushing the commits to remote repository.`n"
     for ($i = 1; $i -le $TimesOfCommit; $i++) {
+        Clear-Host
         git add .
         git commit -m "commit number: $($CommitNumber)"
         git push origin main
         Clear-Host
         start-sleep 1
-        Write-Host "Pushing the commits to remote repository.`n"
-        Write-Host "Commit Number: $($CommitNumber)`n" 
         Add-Content -Path "./files/commits.txt" -Value "Commit Number: $($CommitNumber +1)"
+        Write-Host "Commit Number: $($CommitNumber)`n" 
         $CommitNumber++
     }
 }
